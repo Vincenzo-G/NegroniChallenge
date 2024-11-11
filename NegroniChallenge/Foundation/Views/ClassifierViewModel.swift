@@ -4,6 +4,7 @@
 //
 //  Created by Adrian Emmanuel Faz Mercado on 10/11/24.
 //
+// This file manages the data used for classification by loading label information from a JSON file (mydata.json). It provides methods to filter and retrieve prediction data based on a recognized label. The classifier data is used to match the prediction labels to their names and translations, which are then displayed in the app.
 
 import Foundation
 

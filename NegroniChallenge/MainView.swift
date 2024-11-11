@@ -4,6 +4,8 @@
 //
 //  Created by Adrian Emmanuel Faz Mercado on 10/11/24.
 //
+// MainView displays details of the recognized object (e.g., name and translation) if one is detected by the camera. It passes the recognized data to ObjectScanOverlayView, which renders it as an overlay in the camera view, allowing users to see the identified object's information directly.
+
 
 import SwiftUI
 

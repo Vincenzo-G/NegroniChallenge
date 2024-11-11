@@ -4,6 +4,7 @@
 //
 //  Created by Adrian Emmanuel Faz Mercado on 10/11/24.
 //
+// This view acts as a wrapper around the LiveCameraRepresentable, which handles live camera input and predictions. When the view appears, it also loads label data from a JSON file to enable object recognition. This view is responsible for displaying real-time predictions by updating the PredictionStatus environment object.
 
 import SwiftUI
 
@@ -15,7 +16,6 @@ struct ClassificationView<Content: View>: View {
     let content: () -> Content
     
     var body: some View {
-//        let predictionLabel = predictionStatus.topLabel
         
         ZStack {
             content()

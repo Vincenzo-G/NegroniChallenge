@@ -4,6 +4,8 @@
 //
 //  Created by Adrian Emmanuel Faz Mercado on 10/11/24.
 //
+// This class handles the state of live prediction results. It stores the latest prediction data, including the recognized label and confidence level. This shared state is accessible throughout the app, enabling consistent updates and display of the prediction information across views.
+
 
 import Foundation
 import SwiftUI
@@ -22,6 +24,6 @@ class PredictionStatus: ObservableObject {
         livePrediction = results
         topLabel = label
         topConfidence = confidence
-        print("setLivePrediction llamado - Label: \(label), Confianza: \(confidence)")
+        
     }
 }
