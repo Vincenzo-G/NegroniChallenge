@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct NegroniChallengeApp: App {
+    @StateObject private var predictionStatus = PredictionStatus()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationStack {
+                ContentView()
+            } .environmentObject(predictionStatus)
+           
         }
     }
 }
