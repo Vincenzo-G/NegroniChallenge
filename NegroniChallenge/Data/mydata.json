@@ -13,6 +13,26 @@
     "label": "Niente",
     "name": "Niente",
     "translation": "nothing"
+  },
+  {
+    "label": "Frigorifero",
+    "name": "Frigorifero",
+    "translation": "refrigerator"
+  },
+  {
+    "label": "Padella",
+    "name": "Padella",
+    "translation": "pan"
+  },
+  {
+    "label": "Forchetta",
+    "name": "Forchetta",
+    "translation": "fork"
+  },
+  {
+    "label": "Tazza",
+    "name": "Tazza",
+    "translation": "cup"
   }
 ]
 

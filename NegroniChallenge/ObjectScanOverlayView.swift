@@ -11,6 +11,8 @@ struct ObjectScanOverlayView: View {
     
     var objectFound: Object?
     @EnvironmentObject var predictionStatus: PredictionStatus
+    var levelObjects : [String] = ["Frigorifero", "Padella", "Forchetta", "Tazza"]
+    let didTapOpen: (Object) -> Void
 
     var body: some View {
         VStack {
@@ -30,6 +32,14 @@ struct ObjectScanOverlayView: View {
                         Text("Keep searching... 🔍")
                             .font(.title2)
                     }
+                    
+                    if let object = objectFound {
+                        Button("\(Image(systemName: "plus"))  Add to collection", action: { didTapOpen(object) })
+                            .buttonStyle(.bordered)
+                            .buttonBorderShape(.capsule)
+                            .controlSize(.large)
+                            .font(.system(.headline, design: .rounded, weight: .semibold))
+                    }
                 }.padding(32)
                     .frame(maxWidth: 500)
                     .background(Color(uiColor: .secondarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
@@ -40,11 +50,12 @@ struct ObjectScanOverlayView: View {
             }
             
         }.frame(maxWidth: .infinity, maxHeight: .infinity)
+        
     }
 }
 
 #Preview {
-    ObjectScanOverlayView(objectFound: Object(label: "Frigorifero", name: "Frigorifero", translation: "Refrigerator") )
+    ObjectScanOverlayView(objectFound: Object(label: "Frigorifero", name: "Frigorifero", translation: "Refrigerator"), didTapOpen: {_ in})
         .background {
             Image("Kitchen")
                 .resizable()

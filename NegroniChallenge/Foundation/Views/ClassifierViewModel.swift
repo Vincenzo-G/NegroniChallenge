@@ -10,7 +10,6 @@ import Foundation
 
 final class ClassifierViewModel: ObservableObject {
     @Published var classifierData: [Object] = []
-    @Published var dataWhenAboutTapped:Int = 0
     @Published var classifierLabels: [String: Bool] = [:]
 
     
@@ -38,7 +37,6 @@ final class ClassifierViewModel: ObservableObject {
     }
     
     func getPredictionData(label: String) -> Object {
-        print("ME LLAMARON!")
         return classifierData.filter { $0.label == label }.first ?? Object()
     }
 }

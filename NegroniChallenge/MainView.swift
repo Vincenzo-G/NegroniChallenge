@@ -16,10 +16,41 @@ struct MainView: View {
     var objectForView: Object? {
         labelData.id == "Niente" ? nil : labelData
     }
+    var levelObjects : [String] = ["Frigorifero", "Padella", "Forchetta", "Tazza"]
+    @EnvironmentObject private var progressTracker: ProgressTracker
     
     
     var body: some View {
-        ObjectScanOverlayView(objectFound: objectForView)
+        VStack(alignment: .leading) {
+            VStack(alignment:.leading, spacing: 25) {
+                
+                ForEach(levelObjects, id: \.self) { object in
+                    Image(object)
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 40, height: 50)
+                        .opacity(progressTracker.isStringInCollection(object) ?  1.0 : 0.2)
+                        
+                }
+                
+               
+            }.padding()
+                .background(RoundedRectangle(cornerRadius: 12.0).fill(Color.yellow).shadow(radius: 10))
+                
+
+            ObjectScanOverlayView(objectFound: objectForView, levelObjects: levelObjects,
+                didTapOpen: didTapOpen(object:))
+        }
+        .sheet(item: $labelDataForModal, onDismiss: { labelDataForModal = nil }) { object in
+            ObjectInfoModal(object: object)
+        }
+        
+
+        
+    }
+    func didTapOpen(object: Object) {
+        progressTracker.addObject(object)
+        labelDataForModal = object
     }
 }
 
@@ -31,4 +62,5 @@ struct MainView: View {
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
         }
+        .environmentObject(ProgressTracker())  
 }

@@ -11,11 +11,14 @@ import SwiftUI
 @main
 struct NegroniChallengeApp: App {
     @StateObject private var predictionStatus = PredictionStatus()
+    @StateObject private var progressTracker = ProgressTracker()
+
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 ContentView()
-            } .environmentObject(predictionStatus)
+            }.environmentObject(predictionStatus)
+             .environmentObject(progressTracker)
            
         }
     }
