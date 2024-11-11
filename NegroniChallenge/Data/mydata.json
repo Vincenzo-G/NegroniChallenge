@@ -1,0 +1,18 @@
+[
+  {
+    "label": "Scarpa",
+    "name": "Scarpa",
+    "translation": "shoe"
+  },
+  {
+    "label": "Libro",
+    "name": "Libro",
+    "translation": "book"
+  },
+  {
+    "label": "Niente",
+    "name": "Niente",
+    "translation": "nothing"
+  }
+]
+
