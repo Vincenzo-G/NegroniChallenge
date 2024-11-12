@@ -14,10 +14,12 @@ struct MainView: View {
     @ObservedObject var classifierViewModel: ClassifierViewModel
     @State private var labelDataForModal: Object? = nil
     var objectForView: Object? {
-        labelData.id == "Niente" ? nil : labelData
+        levelObjects.contains(labelData.id) ? labelData : nil
     }
     var levelObjects : [String] = ["Frigorifero", "Padella", "Forchetta", "Tazza"]
     @EnvironmentObject private var progressTracker: ProgressTracker
+    @State var showInstructions: Bool = true
+    @State private var showCompletionSheet = false
     
     
     var body: some View {
@@ -43,7 +45,20 @@ struct MainView: View {
         }
         .sheet(item: $labelDataForModal, onDismiss: { labelDataForModal = nil }) { object in
             ObjectInfoModal(object: object)
+                .presentationDetents([.medium, .large])
         }
+        .sheet(isPresented: $showInstructions) {
+            InstructionsView()
+        }
+        .sheet(isPresented: $showCompletionSheet) {
+                    CompletionView()
+                }
+        .onChange(of: progressTracker.areAllLevelObjectsCollected(levelObjects: levelObjects)) { allDiscovered in
+                    if allDiscovered {
+                        showCompletionSheet = true
+                    }
+                }
+        
         
 
         

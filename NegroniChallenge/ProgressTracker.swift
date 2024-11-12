@@ -43,4 +43,9 @@ class ProgressTracker: ObservableObject {
         objectsCollected.contains(objectString)
     }
     
+    // Check if all objects in the current level have been collected
+    func areAllLevelObjectsCollected(levelObjects: [String]) -> Bool {
+        Set(levelObjects).isSubset(of: objectsCollected)
+    }
+    
 }

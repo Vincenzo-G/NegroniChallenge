@@ -8,8 +8,20 @@
 import SwiftUI
 
 struct ObjectsToDiscoverView: View {
+    @Environment(\.dismiss) var dismiss
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Text("Today's Mission")
+        
+        Button {
+            dismiss()
+            dismiss()
+        } label: {
+            Text("START")
+                .padding()
+                .foregroundStyle(.white)
+                .background(RoundedRectangle(cornerRadius: 10))
+                
+        }
     }
 }
 
