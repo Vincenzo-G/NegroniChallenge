@@ -11,6 +11,37 @@ import Combine
 class ProgressTracker: ObservableObject {
     
     @Published private var objectsCollected: Set<String> = []
+    @Published var currentLevelByPlace: [String: Int] = [
+        "Kitchen": 1,
+        "Bathroom": 1,
+        "Classroom": 1,
+        "Bedroom": 1
+    ]
+    
+    // Define the places with the respective objects of each level.
+    let places: [String: [[String]]] = [
+        "Kitchen": [
+            ["Spoon", "Fork", "Knife", "Plate"],         // Level 1
+            ["Glass", "Cup", "Bowl", "Pan"],             // Level 2
+            ["Oven", "Stove", "Fridge", "Blender"]       // Level 3
+        ],
+        "Classroom": [
+            ["Toothbrush", "Soap", "Towel", "Mirror"], // Level 1
+            ["Shampoo", "Conditioner", "Toilet", "Sink"], // Level 2
+            ["Bathtub", "Razor", "ToiletPaper", "Mat"] // Level 3
+        ],
+        "Bedroom": [
+            ["Spoon", "Fork", "Knife", "Plate"],         // Level 1
+            ["Glass", "Cup", "Bowl", "Pan"],             // Level 2
+            ["Oven", "Stove", "Fridge", "Blender"]       // Level 3
+        ],
+        "Bathroom": [
+            ["Spoon", "Fork", "Knife", "Plate"],         // Level 1
+            ["Glass", "Cup", "Bowl", "Pan"],             // Level 2
+            ["Oven", "Stove", "Fridge", "Blender"]       // Level 3
+        ]
+        
+    ]
     
     let allObjects: [Object]
     
@@ -48,4 +79,29 @@ class ProgressTracker: ObservableObject {
         Set(levelObjects).isSubset(of: objectsCollected)
     }
     
+    // Get the list of names of objects corresponding to the level.
+    func getCurrentObjectNames(for placeName: String) -> [String]? {
+        guard let levels = places[placeName],
+              let currentLevel = currentLevelByPlace[placeName] else { return nil }
+        return levels[safe: currentLevel - 1]
+    }
+    
+    // Advance the level of a setting depending on whether he/she completed the level or not. 
+    func advanceLevel(for placeName: String) {
+           guard let maxLevel = places[placeName]?.count,
+                 let currentLevel = currentLevelByPlace[placeName] else { return }
+           
+           if currentLevel < maxLevel {
+               currentLevelByPlace[placeName] = currentLevel + 1
+           } else {
+               print("\(placeName) is already at the top level!")
+           }
+       }
+    
+}
+
+extension Collection {
+    subscript(safe index: Index) -> Element? {
+        return indices.contains(index) ? self[index] : nil
+    }
 }

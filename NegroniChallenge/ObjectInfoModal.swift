@@ -10,6 +10,9 @@ import AVKit
 
 struct ObjectInfoModal: View {
     var object: Object = Object(label: "Padella", name: "Amicizia", translation: "Refrigerator")
+    @EnvironmentObject var predictionStatus: PredictionStatus
+    @EnvironmentObject private var progressTracker: ProgressTracker
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         
@@ -35,6 +38,19 @@ struct ObjectInfoModal: View {
             Image(systemName: "play.circle.fill")
                 .padding()
                 .font(.title)
+        }
+        
+        
+        Button {
+            withAnimation {
+                progressTracker.addObject(object)
+                dismiss()
+            }
+            
+            
+        } label: {
+            Text("Collect!")
+            
         }
 
     }
