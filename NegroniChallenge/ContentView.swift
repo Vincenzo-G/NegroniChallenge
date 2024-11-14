@@ -19,7 +19,7 @@ struct ContentView: View {
                 Text("Hello, fruitellas!")
                 
                 NavigationLink {
-                    CameraView()
+                    CameraView(levelObjects: ["Portafoglio", "Telefono", "Computer", "Chiavi"])
                 } label: {
                     Text("Abre camarita loca")
                         .buttonStyle(.bordered)

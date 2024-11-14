@@ -13,7 +13,7 @@ import Vision
 
 class PredictionStatus: ObservableObject {
     // TODO - replace with the name of your classifier
-    @Published var modelObject = Test2()
+    @Published var modelObject = Test3()
     @Published var topLabel = ""
     @Published var topConfidence = ""
     
@@ -26,4 +26,10 @@ class PredictionStatus: ObservableObject {
         topConfidence = confidence
         
     }
+}
+
+struct Setting {
+    var title: String
+    var currentLevel: Int = 1
+    
 }

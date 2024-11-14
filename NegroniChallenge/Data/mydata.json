@@ -33,6 +33,27 @@
     "label": "Tazza",
     "name": "Tazza",
     "translation": "cup"
+  },
+  {
+    "label": "Computer",
+    "name": "Computer",
+    "translation": "Computer"
+  },
+  {
+    "label": "Portafoglio",
+    "name": "Portafoglio",
+    "translation": "Wallet"
+  }
+  ,
+  {
+    "label": "Chiavi",
+    "name": "Chiavi",
+    "translation": "Keys"
+  },
+  {
+    "label": "Telefono",
+    "name": "Telefono",
+    "translation": "Phone"
   }
 ]
 
