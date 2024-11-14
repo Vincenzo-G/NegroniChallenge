@@ -1,81 +1,81 @@
-//
-//  SettingView.swift
-//  NegroniChallenge
-//
-//  Created by Vincenzo Gerelli on 12/11/24.
-//
-
 import SwiftUI
 
 struct SettingView: View {
     let settings = ["Kitchen", "Bedroom", "Bathroom", "Classroom"]
-
+    
     var body: some View {
-        VStack(spacing: 20) {
-            // Welcome Message
-            Text("Welcome, Enzo!")
-                .font(.largeTitle)
-                .fontWeight(.bold)
-                .foregroundColor(.black)
-            
-            // Grid Layout for Cards
-            LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 20) {
-                ForEach(settings, id: \.self) { setting in
-                    SettingCardView(setting: setting)
-                }
-            }
-            
-            // Footer with Camera Character and Instruction
-            HStack {
-                Spacer()
-                VStack {
-                    HStack {
-                        
-                        Image("Camarita")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 80, height: 80)
+        NavigationView {
+            VStack {
+                HStack {
+                    ZStack{
+                        SpeechBubble(cornerRadius: 20, isBottom: false, pointLocation: 30)
+                            .fill(Color.brown.opacity(0.1))
+                            .stroke(Color.brown.opacity(0.5), lineWidth: 3)
+                        Text("Where do you want to go?")
+                            .font(.system(size: 20)).bold()
+                            .foregroundStyle(.brown)
                             .padding()
+                    }.frame(width: 250, height: 100).padding(.leading, 15)
+                    
+                    Image("Camarita")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 100, height: 100)
+                        .padding(.horizontal, 10)
+                }
+                .padding(.top, 80)
+                LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 20) {
+                    ForEach(settings, id: \.self) { setting in
+                        
+                        NavigationLink(destination: CameraView()) {
+                            SettingCardView(setting: setting)
+                        }
+                        
                     }
                 }
+                .padding(.top, 20)
+                .padding(.horizontal, 20)
                 Spacer()
             }
-            .padding(.top, 20)
-        }
-        .padding()
+            .background(Color(red: 0.91, green: 0.87, blue: 0.8))
+            .ignoresSafeArea()
+            
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
+
 struct SettingCardView: View {
     let setting: String
-
+    
     var body: some View {
         ZStack {
-            RoundedRectangle(cornerRadius: 15)
-                .fill(Color.white)
-                .frame(height: 150)
-                .shadow(radius: 5)
+            RoundedRectangle(cornerRadius: 20)
+                .stroke(Color.brown.opacity(0.5), lineWidth: 3)
+                .frame(height: 140)
             
             VStack {
                 Text(setting)
-                    .font(.title2)
+                    .font(.title3)
                     .fontWeight(.medium)
                     .foregroundColor(.black)
                 
                 HStack {
                     ForEach(0..<3) { _ in
-                        Image(systemName: "star.fill")
-                            .foregroundColor(.yellow)
+                        Image(systemName: "star")
+                            .symbolRenderingMode(.hierarchical)
+                            .foregroundStyle(.yellow.opacity(1))
+                            .font(.system(size: 20))
+                        
                     }
                 }
                 .padding(.top, 10)
             }
         }
+        .padding()
     }
-    
 }
 
 #Preview {
     SettingView()
 }
-
