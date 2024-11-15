@@ -5,31 +5,41 @@ struct SelectLanguageView: View {
         ("italy", "Italian"),
         ("spain", "Spanish"),
         ("france", "French"),
-        ("germany", "German"),
-        ("china", "Chinese"),
-        ("india", "Hindi"),
-        ("arabia", "Arabic"),
-        ("japan", "Japanese"),
-        ("mexico", "Spanish (Mexico)"),
-        ("iran", "Persian")
-    ]
+        ("germany", "German")]
+    /*        ("china", "Chinese"),
+     ("india", "Hindi"),
+     ("arabia", "Arabic"),
+     ("japan", "Japanese"),
+     ("mexico", "Spanish (Mexico)"),
+     ("iran", "Persian")
+     ]*/
     
     @State private var selectedLanguage: String? = nil
     @State private var isPressed = false
     @State private var showNextView = false
-    @State private var showTopBorder = false
-
+    @State private var revealProgress: CGFloat = 0
+    
+    
     var body: some View {
         VStack {
             // Top HStack
             HStack {
                 ZStack{
                     SpeechBubble(cornerRadius: 20, isBottom: false, pointLocation: 30)
-                        .fill(Color.brown.opacity(0.1))
+                        .fill(Color.white.opacity(0.7))
                         .stroke(Color.brown.opacity(0.5), lineWidth: 3)
                     Text("What do you want to learn?")
-                        .font(.system(size: 20)).bold()
+                        .font(.custom("SourGummy-Medium", size: 24))
+                        .textCase(.uppercase)
                         .foregroundStyle(.brown)
+                        .mask(
+                            Rectangle()
+                                .scaleEffect(x: revealProgress, y: 1, anchor: .leading)
+                        )
+                        .animation(.easeOut(duration: 0.5), value: revealProgress)
+                        .onAppear {
+                            revealProgress = 1
+                        }
                         .padding()
                 }.frame(width: 250, height: 100).padding(.leading, 15)
                 
@@ -40,6 +50,7 @@ struct SelectLanguageView: View {
                     .padding(.horizontal, 10)
             }
             .padding(.top, 80)
+            .padding(.bottom, 20)
             
             Spacer()
             
@@ -60,7 +71,8 @@ struct SelectLanguageView: View {
                             )
                         
                         Text(language)
-                            .font(.system(size: 18))
+                            .font(.custom("SourGummy-Medium", size: 24))
+                            .textCase(.uppercase)
                             .fontWeight(.bold)
                             .textCase(.uppercase)
                             .font(.headline)
@@ -69,31 +81,17 @@ struct SelectLanguageView: View {
                         
                         Spacer()
                     }
-                    .listRowBackground(Color.clear) 
+                    .listRowBackground(Color.clear)
                     .padding(.vertical, 5)
                     .onTapGesture {
                         selectedLanguage = isSelected ? nil : language
                     }
                 }
-                .onAppear {
-                    // Show the top border when scrolling starts
-                    withAnimation {
-                        showTopBorder = true
-                    }
-                }
-                .onDisappear {
-                    // Hide the top border when scrolling stops
-                    withAnimation {
-                        showTopBorder = false
-                    }
-                }
             }
             .background(Color.clear)
             .listStyle(PlainListStyle())
-            
-            
             Spacer()
-            
+            Divider()
             // Confirm Button
             Button(action: {
                 if selectedLanguage != nil {
@@ -115,8 +113,9 @@ struct SelectLanguageView: View {
                         .offset(y: isPressed ? 3 : 0) // Move down when pressed
                     
                     Text("CONFIRM")
-                        .font(.system(size: 18))
-                        .foregroundColor(selectedLanguage == nil ? Color(red: 0.75, green: 0.75, blue: 0.75) : Color(red: 0.91, green: 0.87, blue: 0.8))
+                        .font(.custom("SourGummy-Medium", size: 24))
+                        .textCase(.uppercase)
+                        .foregroundColor(selectedLanguage == nil ? Color(red: 0.75, green: 0.75, blue: 0.75) : .customBrown)
                         .padding()
                         .offset(y: isPressed ? 5 : 0)
                 }
@@ -131,13 +130,13 @@ struct SelectLanguageView: View {
         .ignoresSafeArea()
         .fullScreenCover(isPresented: $showNextView) {
             SettingView()
-                .presentationDetents([])
         }
     }
 }
 
 #Preview {
-    SelectLanguageView()
+    SelectLanguageView().environmentObject(ProgressTracker())
+
 }
 
 

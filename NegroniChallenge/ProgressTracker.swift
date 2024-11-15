@@ -21,7 +21,7 @@ class ProgressTracker: ObservableObject {
     // Define the places with the respective objects of each level.
     let places: [String: [[String]]] = [
         "Kitchen": [
-            ["Spoon", "Fork", "Knife", "Plate"],         // Level 1
+            ["Tazza", "Forchetta", "Frigorifero", "Padella"],         // Level 1
             ["Glass", "Cup", "Bowl", "Pan"],             // Level 2
             ["Oven", "Stove", "Fridge", "Blender"]       // Level 3
         ],

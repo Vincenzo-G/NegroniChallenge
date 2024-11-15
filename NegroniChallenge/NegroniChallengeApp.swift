@@ -16,7 +16,7 @@ struct NegroniChallengeApp: App {
     var body: some Scene {
         WindowGroup {
             NavigationStack {
-                SelectLanguageView()
+                WelcomeView()
             }.environmentObject(predictionStatus)
              .environmentObject(progressTracker)
            
