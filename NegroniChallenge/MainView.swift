@@ -18,7 +18,7 @@ struct MainView: View {
     }
     var levelObjects : [String] = ["Frigorifero", "Padella", "Forchetta", "Tazza"]
     @EnvironmentObject private var progressTracker: ProgressTracker
-    @State var showInstructions: Bool = false
+    @State var showInstructions: Bool = true
     @State private var showCompletionSheet = false
     
     

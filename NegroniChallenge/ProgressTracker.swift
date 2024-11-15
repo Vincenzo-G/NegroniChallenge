@@ -40,7 +40,6 @@ class ProgressTracker: ObservableObject {
             ["Glass", "Cup", "Bowl", "Pan"],             // Level 2
             ["Oven", "Stove", "Fridge", "Blender"]       // Level 3
         ]
-        
     ]
     
     let allObjects: [Object]
