@@ -14,19 +14,13 @@ struct ObjectInfoModal: View {
     @EnvironmentObject private var progressTracker: ProgressTracker
     @Environment(\.dismiss) var dismiss
     @State var showTitle: Bool = false
+    @State var isPressed = false
     
     var body: some View {
         
         ZStack {
             
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color(red: 1.0, green: 0.8, blue: 0),
-                    Color.clear
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            ).ignoresSafeArea()
+            Color.customBrown.ignoresSafeArea()
             
             VStack {
                 HStack {
@@ -39,10 +33,13 @@ struct ObjectInfoModal: View {
                     if showTitle {
                         VStack(alignment: .leading) {
                             Text(object.label)
-                                .fontWeight(.semibold)
-                                .font(.largeTitle)
-                            
+                                .foregroundStyle(.brown)
+                                .font(.custom("SourGummy-Medium", size: 28))
+                                .textCase(.uppercase)
+                                .fontWeight(.bold)
                             Text(object.translation)
+                                .font(.custom("SourGummy-Medium", size: 22))
+                                .foregroundStyle(.brown.opacity(0.9))
                         }
                     }
                
@@ -61,8 +58,12 @@ struct ObjectInfoModal: View {
                         synthesizer.speak(utterance)
                     } label: {
                         Image(systemName: "play.circle.fill")
+                            .resizable()
+                            .frame(width: 70, height: 70)
                             .padding()
                             .font(.title)
+                            .foregroundStyle(.brown)
+
                     }
                          
                     
@@ -74,8 +75,27 @@ struct ObjectInfoModal: View {
                         }
 
                     } label: {
-                        Text("Collect!")
-                        
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(Color(red: 0.40, green: 0.40, blue: 0.40))
+                                .frame(width: .infinity, height: 50)
+                                .padding(.horizontal, 2)
+                                .offset(y: isPressed ? 3 : 3)
+                            RoundedRectangle(cornerRadius: 15)
+                                .fill(Color.brown)
+                                .frame(width: .infinity, height: 50)
+                                .padding(.horizontal, 2)
+                                .offset(y: isPressed ? 3 : 0) // Move down when pressed
+                            
+                            Text("COLLECT!")
+                                .font(.custom("SourGummy-Medium", size: 24))
+                                .textCase(.uppercase)
+                                .foregroundColor(Color(.customBrown))
+                                .padding()
+                                .offset(y: isPressed ? 5 : 0)
+                        }.padding(.top, 50)
+                        .padding(.horizontal, 60)
+
                     }
                     
                 }

@@ -37,15 +37,8 @@ struct MainView: View {
                 }
                 
                
-            }.padding()
-                .background(RoundedRectangle(cornerRadius: 20.0).fill(        LinearGradient(
-                    gradient: Gradient(colors: [
-                        Color(red: 1.0, green: 0.60, blue: 0.3), // Top color (slightly darker yellow)
-                        Color.yellow // Bottom color (current yellow)
-                    ]),
-                    startPoint: .top,
-                    endPoint: .bottom
-                )).shadow(radius: 15))
+            }.padding().padding(.leading, 20)
+                .background(RoundedRectangle(cornerRadius: 20.0).fill(  .customBrown).shadow(radius: 15))
                 
 
             ObjectScanOverlayView(objectFound: objectForView, levelObjects: levelObjects,

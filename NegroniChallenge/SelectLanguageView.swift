@@ -22,7 +22,6 @@ struct SelectLanguageView: View {
     
     var body: some View {
         VStack {
-            // Top HStack
             HStack {
                 ZStack{
                     SpeechBubble(cornerRadius: 20, isBottom: false, pointLocation: 30)
@@ -54,7 +53,6 @@ struct SelectLanguageView: View {
             
             Spacer()
             
-            // Scrollable List with scroll detection
             List {
                 ForEach(languages, id: \.0) { (imageName, language) in
                     let isSelected = selectedLanguage == language
@@ -126,7 +124,7 @@ struct SelectLanguageView: View {
             .padding(.bottom, 50)
             .frame(maxWidth: .infinity)
         }
-        .background(Color(red: 0.91, green: 0.87, blue: 0.8))
+        .background(.customBrown)
         .ignoresSafeArea()
         .fullScreenCover(isPresented: $showNextView) {
             SettingView()

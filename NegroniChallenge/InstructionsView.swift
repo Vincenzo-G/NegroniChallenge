@@ -10,103 +10,97 @@ import SwiftUI
 struct InstructionsView: View {
     @Environment(\.dismiss) var dismiss
     var levelObjects : [String] = ["Frigorifero", "Padella", "Forchetta", "Tazza"]
-    @State var showChat = false
     @State var showButton = false
-
+    @State private var isPressed = false
+    @State private var revealProgress : CGFloat = 0
+    
     var body: some View {
         NavigationStack {
-        ZStack {
-            LinearGradient(
-                gradient: Gradient(colors: [
-                    Color.clear,
-                    Color(red: 1.0, green: 0.75, blue: 0) // Top color (slightly darker yellow)
-                     // Bottom color (current yellow)
-                ]),
-                startPoint: .top,
-                endPoint: .bottom
-            ).ignoresSafeArea()
+            ZStack {
+                Color(.customBrown)
                 VStack(spacing: 18) {
                     
-                    Text("The Kitchen")
-                        .font(.system(size: 45))
-                        .fontWeight(.bold)
+                    Spacer()
                     
-                    
-                    Image("Camarita")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200)
-                        .shadow(radius: 8)
-                        .padding(.top)
-                    
-                    if showChat {
-                        VStack {
-                            Image(systemName: "triangle.fill")
-                                .foregroundStyle(.white).opacity(0.9)
-                                .offset(y: 4)
+                    VStack {
+                        ZStack {
+                            SpeechBubble(cornerRadius: 20, isBottom: true, pointLocation: 80)
+                                .fill(Color.white.opacity(0.7))
+                                .stroke(Color.brown.opacity(0.5), lineWidth: 3)
                             
-                            Text("Welcome my friend! Can you help me find the objects that I've lost? 🥹")
-                                .multilineTextAlignment(.center)
+                            Text("Welcome my friend! Can you help me find the objects that I've lost?")
+                                .font(.custom("SourGummy-Medium", size: 24))
+                                .textCase(.uppercase)
+                                .foregroundStyle(.brown)
+                                .mask(
+                                    Rectangle()
+                                        .scaleEffect(x: revealProgress, y: 1, anchor: .leading)
+                                )
+                                .animation(.easeOut(duration: 0.5), value: revealProgress)
+                                .onAppear {
+                                    revealProgress = 1
+                                }
                                 .padding()
-                                .background(RoundedRectangle(cornerRadius: 20).fill(.white).opacity(0.9))
-                            if showButton {
-                                NavigationLink {
-                                    ObjectsToDiscoverView(levelObjects: levelObjects)
-                                } label: {
-                                    
-                                    Text("Open mission 🚀")
-                                        .padding()
-                                        .fontWeight(.semibold)
-                                        .background(Color.orange)
-                                        .clipShape(RoundedRectangle(cornerRadius: 10))
-                                        .overlay {
-                                            RoundedRectangle(cornerRadius: 10)
-                                                .stroke(lineWidth: 1)
-                                                
-                                        }
-                                        .foregroundStyle(.white)
-                                        .buttonStyle(.bordered)
-                                        .buttonBorderShape(.capsule)
-                                        .padding()
-                                        
-                                }.padding()
-                            }
-  
                         }
-                    }
-                    
-
-                    
-                   
-                    
+                        .frame(width: 300, height: 180)
                         
+                        Image("Camarita")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 170, height: 170)
+                            .padding(.horizontal, 10)
+                    }
+                    .padding(.top, 80)
+                    .padding(.bottom, 20)
                     
-                    
-                    
-                    
-                     
-                }.padding(30)
-                    
+                    Spacer()
+                    if showButton {
+                        NavigationLink {
+                            ObjectsToDiscoverView(levelObjects: levelObjects)
+                        } label: {
+                            ZStack {
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color(red: 0.40, green: 0.40, blue: 0.40))
+                                    .frame(width: .infinity, height: 50)
+                                    .padding(.horizontal, 2)
+                                    .offset(y: isPressed ? 3 : 3) // Move up when pressed
+                                
+                                RoundedRectangle(cornerRadius: 15)
+                                    .fill(Color.brown)
+                                    .frame(width: .infinity, height: 50)
+                                    .padding(.horizontal, 2)
+                                    .offset(y: isPressed ? 3 : 0) // Move down when pressed
+                                
+                                Text("YES!")
+                                    .font(.custom("SourGummy-Medium", size: 24))
+                                    .textCase(.uppercase)
+                                    .foregroundColor(Color(.customBrown))
+                                    .padding()
+                                    .offset(y: isPressed ? 5 : 0)
+                            }
+
+                            
+                        }.padding()
+                    }
                 
-            }
-        }.onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                withAnimation {
-                    showChat = true
-                }
-                
+            }.padding(30)
+            
+            
+        }.ignoresSafeArea()
+            .textCase(.uppercase)
+            .font(.custom("SourGummy-Medium", size: 24))
+        
+    }.onAppear {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            withAnimation {
+                showButton = true
             }
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                withAnimation {
-                    showButton = true
-                }
-                
-            }
         }
-        
-
     }
+    
+    
+}
 }
 
 #Preview {
