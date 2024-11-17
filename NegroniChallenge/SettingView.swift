@@ -6,7 +6,7 @@ struct SettingView: View {
     @State private var revealProgress: CGFloat = 0
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ZStack {
                 Color(.customBrown)
                 VStack {
@@ -40,7 +40,7 @@ struct SettingView: View {
                     LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 20) {
                         ForEach(settings, id: \.self) { setting in
                             
-                            NavigationLink(destination: CameraView(levelObjects: progressTracker.getCurrentObjectNames(for: setting)!)) {
+                            NavigationLink(destination: CameraView(levelObjects: progressTracker.getCurrentObjectNames(for: setting)!, currentSetting: setting)) {
                                 SettingCardView(setting: setting)
                                 
                             }

@@ -40,7 +40,8 @@ struct ObjectScanOverlayView: View {
                                         revealProgress = 1
                                     }
                                     .padding()
-                            }.frame(width: 250, height: 100).padding(.leading, 15)
+                            }.frame(width: 190, height: 130)
+                                .padding(.leading, 15)
                             
                             Image("Camarita")
                                 .resizable()
@@ -67,7 +68,7 @@ struct ObjectScanOverlayView: View {
                                         revealProgress = 1
                                     }
                                     .padding()
-                            }.frame(width: 250, height: 100).padding(.leading, 15)
+                            }.frame(width: 190, height: 130).padding(.leading, 15)
                             
                             Image("Camarita")
                                 .resizable()

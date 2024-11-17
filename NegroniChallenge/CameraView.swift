@@ -12,13 +12,15 @@ struct CameraView: View {
     @EnvironmentObject private var predictionStatus: PredictionStatus
     @StateObject var classifierViewModel = ClassifierViewModel()
     var levelObjects : [String] = ["Frigorifero", "Padella", "Forchetta", "Tazza"]
+    var currentSetting: String = "Kitchen"
     
     var body: some View {
         ClassificationView(classifierViewModel: classifierViewModel) {
             MainView(
                 labelData: classifierViewModel.getPredictionData(label: predictionStatus.topLabel),
                 classifierViewModel: classifierViewModel,
-                levelObjects: levelObjects
+                levelObjects: levelObjects,
+                currentSetting: currentSetting
             )
             
         }

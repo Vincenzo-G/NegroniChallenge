@@ -20,6 +20,7 @@ struct MainView: View {
     @EnvironmentObject private var progressTracker: ProgressTracker
     @State var showInstructions: Bool = true
     @State private var showCompletionSheet = false
+    var currentSetting: String = "Kitchen"
     
     
     var body: some View {
@@ -37,7 +38,7 @@ struct MainView: View {
                 }
                 
                
-            }.padding().padding(.leading, 20)
+            }.padding()
                 .background(RoundedRectangle(cornerRadius: 20.0).fill(  .customBrown).shadow(radius: 15))
                 
 
@@ -52,7 +53,7 @@ struct MainView: View {
             InstructionsView(levelObjects: levelObjects)
         }
         .sheet(isPresented: $showCompletionSheet) {
-                    CompletionView()
+            CompletionView(levelObjects: levelObjects, currentSetting: currentSetting)
                 }
         .onChange(of: progressTracker.areAllLevelObjectsCollected(levelObjects: levelObjects)) { allDiscovered in
                     if allDiscovered {
