@@ -81,9 +81,14 @@ struct CompletionView: View {
              
                         
                     Button {
-                        dismiss()
                         isPresented = true
-                       progressTracker.advanceLevel(for: currentSetting)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            withAnimation {
+                                progressTracker.advanceLevel(for: currentSetting)
+                            }
+                        }
+                        
+  
                         print("funciona? :(")
                     } label: {
                         Text("Complete level")

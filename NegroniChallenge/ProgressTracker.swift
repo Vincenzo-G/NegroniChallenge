@@ -85,17 +85,35 @@ class ProgressTracker: ObservableObject {
         return levels[safe: currentLevel - 1]
     }
     
-    // Advance the level of a setting depending on whether he/she completed the level or not. 
+    // Advance the level of a setting depending on whether he/she completed the level or not.
     func advanceLevel(for placeName: String) {
-           guard let maxLevel = places[placeName]?.count,
-                 let currentLevel = currentLevelByPlace[placeName] else { return }
-           
-           if currentLevel < maxLevel {
-               currentLevelByPlace[placeName] = currentLevel + 1
-           } else {
-               print("\(placeName) is already at the top level!")
-           }
-       }
+        guard let maxLevel = places[placeName]?.count,
+              let currentLevel = currentLevelByPlace[placeName] else { return }
+        
+        if currentLevel < maxLevel {
+            currentLevelByPlace[placeName] = currentLevel + 1
+        } else {
+            print("\(placeName) is already at the top level!")
+        }
+    }
+    
+    func getPercentage(for placeName: String) -> Double {
+        
+        switch currentLevelByPlace[placeName] {
+        case 1:
+            return 0.0
+        case 2:
+            return 0.33
+        case 3:
+            return 0.66
+        case 4:
+            return 1.0
+        default:
+            return 0.0
+            
+        }
+        
+    }
     
 }
 
