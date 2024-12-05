@@ -12,4 +12,5 @@ struct Object: Identifiable, Codable {
     var name: String = "niente"
     var translation: String = "niente"
     var id: String { label }
+    var spanish: String = "nada"
 }

@@ -17,16 +17,17 @@ class ProgressTracker: ObservableObject {
         "Classroom": 1,
         "Bedroom": 1
     ]
+    @Published var selectedLanguage: String = "it"
     
     // Define the places with the respective objects of each level.
     let places: [String: [[String]]] = [
         "Kitchen": [
             ["Tazza", "Forchetta", "Frigorifero", "Padella"],         // Level 1
-            ["Glass", "Cup", "Bowl", "Pan"],             // Level 2
+            ["Bicchiere", "Cucchiaio", "Fornelli", "Sale"],             // Level 2
             ["Oven", "Stove", "Fridge", "Blender"]       // Level 3
         ],
         "Classroom": [
-            ["Toothbrush", "Soap", "Towel", "Mirror"], // Level 1
+            ["Computer", "Portafoglio", "Telefono", "Chiavi"], // Level 1
             ["Shampoo", "Conditioner", "Toilet", "Sink"], // Level 2
             ["Bathtub", "Razor", "ToiletPaper", "Mat"] // Level 3
         ],

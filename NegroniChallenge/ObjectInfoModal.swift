@@ -32,7 +32,8 @@ struct ObjectInfoModal: View {
                     
                     if showTitle {
                         VStack(alignment: .leading) {
-                            Text(object.label)
+                            
+                            Text(progressTracker.selectedLanguage == "Spanish" ? object.spanish : object.label)
                                 .foregroundStyle(.brown)
                                 .font(.custom("SourGummy-Medium", size: 28))
                                 .textCase(.uppercase)
@@ -50,8 +51,8 @@ struct ObjectInfoModal: View {
                 VStack  {
                     
                     Button {
-                        let utterance = AVSpeechUtterance(string: object.label)
-                        utterance.voice = AVSpeechSynthesisVoice(language: "it-IT")
+                        let utterance = AVSpeechUtterance(string: progressTracker.selectedLanguage == "Spanish" ? object.spanish : object.label)
+                        utterance.voice = AVSpeechSynthesisVoice(language: progressTracker.selectedLanguage == "Spanish" ? "es-ES" : "it-IT")
                         utterance.rate = 0.5
 
                         let synthesizer = AVSpeechSynthesizer()

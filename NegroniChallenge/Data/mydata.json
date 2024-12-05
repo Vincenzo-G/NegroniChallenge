@@ -2,58 +2,70 @@
   {
     "label": "Scarpa",
     "name": "Scarpa",
-    "translation": "shoe"
+    "translation": "shoe",
+    "spanish": "Zapato"
   },
   {
     "label": "Libro",
     "name": "Libro",
-    "translation": "book"
+    "translation": "book",
+    "spanish": "Libro"
+    
   },
   {
     "label": "Niente",
     "name": "Niente",
-    "translation": "nothing"
+    "translation": "nothing",
+    "spanish": "Nada"
   },
   {
     "label": "Frigorifero",
     "name": "Frigorifero",
-    "translation": "refrigerator"
+    "translation": "refrigerator",
+    "spanish": "Refrigerador"
   },
   {
     "label": "Padella",
     "name": "Padella",
-    "translation": "pan"
+    "translation": "pan",
+    "spanish": "sartén"
   },
   {
     "label": "Forchetta",
     "name": "Forchetta",
-    "translation": "fork"
+    "translation": "fork",
+    "spanish": "Tenedor"
   },
   {
     "label": "Tazza",
     "name": "Tazza",
-    "translation": "cup"
+    "translation": "cup",
+    "spanish": "Taza"
   },
   {
     "label": "Computer",
     "name": "Computer",
-    "translation": "Computer"
+    "translation": "Computer",
+    "spanish": "Computadora"
   },
   {
     "label": "Portafoglio",
     "name": "Portafoglio",
-    "translation": "Wallet"
+    "translation": "Wallet",
+    "spanish": "Cartera"
   }
   ,
   {
     "label": "Chiavi",
     "name": "Chiavi",
-    "translation": "Keys"
+    "translation": "Keys",
+    "spanish": "Llaves"
   },
   {
     "label": "Telefono",
     "name": "Telefono",
-    "translation": "Phone"
+    "translation": "Phone",
+    "spanish": "Telefono"
   }
 ]
 

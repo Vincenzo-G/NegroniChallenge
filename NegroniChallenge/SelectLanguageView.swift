@@ -18,7 +18,7 @@ struct SelectLanguageView: View {
     @State private var isPressed = false
     @State private var showNextView = false
     @State private var revealProgress: CGFloat = 0
-    
+    @EnvironmentObject private var progressTracker: ProgressTracker
     
     var body: some View {
         VStack {
@@ -83,6 +83,7 @@ struct SelectLanguageView: View {
                     .padding(.vertical, 5)
                     .onTapGesture {
                         selectedLanguage = isSelected ? nil : language
+                        progressTracker.selectedLanguage = language
                     }
                 }
             }
@@ -109,6 +110,7 @@ struct SelectLanguageView: View {
                         .frame(width: .infinity, height: 50)
                         .padding(.horizontal, 2)
                         .offset(y: isPressed ? 3 : 0) // Move down when pressed
+                    
                     
                     Text("CONFIRM")
                         .font(.custom("SourGummy-Medium", size: 24))

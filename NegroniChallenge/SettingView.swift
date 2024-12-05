@@ -43,7 +43,7 @@ struct SettingView: View {
                             .padding(.horizontal, 10)
                     }
                     .padding(.top, 80)
-                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 20) {
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 2), spacing: 5) {
                         ForEach(settings, id: \.self) { setting in
                             
                             NavigationLink(destination: CameraView(levelObjects: progressTracker.getCurrentObjectNames(for: setting)!, currentSetting: setting)) {
@@ -73,16 +73,17 @@ struct SettingCardView: View {
             RoundedRectangle(cornerRadius: 20)
                 .stroke(Color.brown.opacity(0.5), lineWidth: 3)
                 .fill(Color.black.opacity(0.05))
-                .frame(height: 180)
+                .frame(width: 160, height: 220)
+                .shadow(radius: 1)
             
             VStack {
                 Text(setting)
-                    .font(.custom("SourGummy-Medium", size: 24))
+                    .font(.custom("SourGummy-Medium", size: 28))
                     .fontWeight(.medium)
                     .foregroundColor(.black.opacity(0.8))
                 
                 Text(emoji)
-                    .font(.system(size: 50))
+                    .font(.system(size: 65))
                     .padding(5)
                 
                 /*
@@ -97,35 +98,60 @@ struct SettingCardView: View {
                  */
                 
                 ZStack  {
-                    ProgressView(value: progressTracker.getPercentage(for: setting)
-                    )
-                    .padding(.horizontal)
-                    .tint(Color.brown)
-                    .padding(.top, 10)
+                   // ProgressView(value: progressTracker.getPercentage(for: setting)
+                    //)
+                    //.padding(.horizontal)
+                    //.tint(Color.brown)
+                    //.padding(.top, 10)
                     
                     
-                    Circle()
-                        .frame(width: 10)
-                        .offset(x: -45,y:5)
-                        .foregroundStyle(.brown)
+                    if progressTracker.currentLevelByPlace[setting] ?? 0 > 1 {
+                        
+                        Image(systemName: "checkmark.circle.fill")
+                            .frame(width: 18)
+                            .offset(x: -50,y:5)
+                            .foregroundStyle(.brown)
+                      
+                    } else {
+
+                        Circle()
+                            .frame(width: 18)
+                            .offset(x: -50,y:5)
+                            .foregroundStyle(.gray)
+                    }
                     
+                    if progressTracker.currentLevelByPlace[setting] ?? 0 > 2 {
+                        
+                        Image(systemName: "checkmark.circle.fill")
+                            .frame(width: 18)
+                            .offset(x: 0,y:5)
+                            .foregroundStyle(.brown)
+
+                    } else {
+                        Circle()
+                            .frame(width: 18)
+                            .offset(x: 0,y:5)
+                            .foregroundStyle(.gray)
+                    }
                     
-                    Circle()
-                        .frame(width: 10)
-                        .offset(x: -15,y:5)
-                        .foregroundStyle(.brown)
+                    if progressTracker.currentLevelByPlace[setting] ?? 0 > 3  {
+                        
+                        Image(systemName: "checkmark.circle.fill")
+                            .frame(width: 18)
+                            .offset(x: 50,y:5)
+                            .foregroundStyle(.brown)
+                        
+                    } else {
+                        Circle()
+                            .frame(width: 18)
+                            .offset(x: 50,y:5)
+                            .foregroundStyle(.gray)
+                    }
+                       
+
+ 
                     
-                    Circle()
-                        .frame(width: 10)
-                        .offset(x: 15,y:5)
-                        .foregroundStyle(.brown)
-                    
-                    Circle()
-                        .frame(width: 10)
-                        .offset(x: 45,y:5)
-                        .foregroundStyle(.brown)
-                    
-                }
+                }.padding(.top)
                 
             }
         }
